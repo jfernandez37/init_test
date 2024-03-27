@@ -16,11 +16,13 @@ def launch_setup(context, *args, **kwargs):
     
     node_1 = Node(package="init_test",
         executable="node_1",
-        name="node_1")
+        name="node_1",
+        output="screen")
     
     node_2 = Node(package="init_test",
         executable="node_2",
-        name="node_2")
+        name="node_2",
+        output="screen")
 
 
     nodes_to_start = [

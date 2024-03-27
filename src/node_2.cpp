@@ -3,18 +3,15 @@
 
 Node2::Node2()
 {
-  std::cout<<"TEST\n\n\n\n"<<std::endl;
-
   if(!rclcpp::ok()){
     rclcpp::init(0,nullptr);
-    msg_ = "init ran";
+    std::cout <<  "node 2 init ran" << std::endl;
   }
   else{
-    msg_ = "init did not run";
+    std::cout <<  "node 2 init did not run" << std::endl;
   }
   
   _ros_node = rclcpp::Node::make_shared("node_2_node");
-  RCLCPP_INFO_STREAM(_ros_node->get_logger(), "Node 2 " << msg_);
   executor_ = std::make_shared<rclcpp::executors::MultiThreadedExecutor>();
   executor_->add_node(_ros_node);
 

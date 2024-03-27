@@ -16,14 +16,13 @@ Node1::Node1()
   // std::string node_name = "conveyor_ros_node";
   if(!rclcpp::ok()){
     rclcpp::init(0,nullptr);
-    msg_ = "init ran";
+    std::cout <<  "node 1 init ran" << std::endl;
   }
   else{
-    msg_ = "init did not run";
+    std::cout <<  "node 1 init did not run" << std::endl;
   }
   
   _ros_node = rclcpp::Node::make_shared("node_1_node");
-  RCLCPP_INFO_STREAM(_ros_node->get_logger(), "Node 1 " << msg_);
   executor_ = std::make_shared<rclcpp::executors::MultiThreadedExecutor>();
   executor_->add_node(_ros_node);
 
