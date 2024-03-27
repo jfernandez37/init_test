@@ -16,7 +16,6 @@ class Node1{
     public: ~Node1();
       void node_1_callback() const;
     private:
-      std::string msg_;
       rclcpp::Node::SharedPtr _ros_node;
       rclcpp::executors::MultiThreadedExecutor::SharedPtr executor_;
       std::thread thread_executor_spin_;

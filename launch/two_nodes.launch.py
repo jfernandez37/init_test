@@ -27,7 +27,7 @@ def launch_setup(context, *args, **kwargs):
 
     nodes_to_start = [
         node_1,
-        node_2
+        # node_2
     ]
     return nodes_to_start
 

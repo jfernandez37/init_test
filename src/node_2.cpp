@@ -11,27 +11,27 @@ Node2::Node2()
     std::cout <<  "node 2 init did not run" << std::endl;
   }
   
-  _ros_node = rclcpp::Node::make_shared("node_2_node");
-  executor_ = std::make_shared<rclcpp::executors::MultiThreadedExecutor>();
-  executor_->add_node(_ros_node);
+  _ros_node_2 = rclcpp::Node::make_shared("node_2_node");
+  executor_2_ = std::make_shared<rclcpp::executors::MultiThreadedExecutor>();
+  executor_2_->add_node(_ros_node_2);
 
   auto spin = [this](){
     while(rclcpp::ok()){
-      executor_->spin_once();
+      executor_2_->spin_once();
     }
   };
 
-  thread_executor_spin_ = std::thread(spin);
+  thread_executor_2_spin_ = std::thread(spin);
 
   // Publisher
-  this->node2_publisher_ = this->_ros_node->create_publisher<std_msgs::msg::String>("node2/msg", 10);
-  node2_timer_ = _ros_node->create_wall_timer(std::chrono::duration<double>(3), std::bind(&Node2::node_2_callback, this));
+  this->node2_publisher_ = this->_ros_node_2->create_publisher<std_msgs::msg::String>("node2/msg", 10);
+  node2_timer_ = _ros_node_2->create_wall_timer(std::chrono::duration<double>(3), std::bind(&Node2::node_2_callback, this));
 }
  
 Node2::~Node2()
 {
-  executor_->cancel();
-  thread_executor_spin_.join();
+  executor_2_->cancel();
+  thread_executor_2_spin_.join();
 }
 
 void Node2::node_2_callback() const{
@@ -42,7 +42,5 @@ void Node2::node_2_callback() const{
 
 int main(int argc, char *argv[])
 {
-  rclcpp::init(argc, argv);
-
   auto node_2 = std::make_shared<Node2>();
 }
